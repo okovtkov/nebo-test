@@ -1,0 +1,14 @@
+.description {
+  display: flex;
+  align-items: center;
+  height: 25px;
+}
+
+.description__term {
+  display: inline-block;
+  font-weight: 700;
+}
+
+.description__definition {
+  margin-left: 10px;
+}
