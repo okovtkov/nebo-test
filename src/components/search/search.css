@@ -1,0 +1,8 @@
+.search {
+  width: 300px;
+  padding: 8px;
+  border-radius: 8px;
+  outline: none;
+  border: 1px solid var(--main);
+  background-color: var(--background);
+}
