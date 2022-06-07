@@ -3,6 +3,6 @@
   padding: 8px;
   border-radius: 8px;
   outline: none;
-  border: 1px solid var(--main);
+  border: none;
   background-color: var(--background);
 }

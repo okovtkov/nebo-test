@@ -24,12 +24,12 @@ function App() {
 
   return (
     <div className="app">
+      <header className="app__header">
+        <Search />
+      </header>
       <Routes>
         <Route path='/' element={
           <div className="app__container">
-            <div className="app__search">
-              <Search />
-            </div>
             <div className="app__cards">
               {data.length !== 0 && data.map((item: Data) => (
                 <Link key={item.name} to={`/characters/${getId(item.url)}`}>

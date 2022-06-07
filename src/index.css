@@ -1,6 +1,6 @@
 :root {
-  --main: rgb(0, 0, 154);
-  --background: rgba(0, 0, 139, 0.05);
+  --main: black;
+  --background: rgb(226, 226, 226);
 }
 
 body {
@@ -19,4 +19,8 @@ code {
 
 dl {
   margin: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }

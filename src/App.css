@@ -12,10 +12,14 @@
   margin-right: auto;
 }
 
-.app__search {
-  width: 100%;
+.app__header {
+  width: 100vw;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-bottom: 1px solid var(--main);
-  padding-bottom: 30px;
+  background-color: var(--main);
+  box-shadow: 0 0 6px 4px gray;
 }
 
 .app__cards {
