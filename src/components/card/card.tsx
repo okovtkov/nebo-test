@@ -1,6 +1,5 @@
-import { useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import { Data } from '../../types';
+import Description from '../description/description';
 import './card.css';
 
 interface Props {
@@ -11,14 +10,8 @@ function Card(props: Props) {
   return (
     <div className="card">
       <dl>
-        <div className="card__list">
-          <dt className="card__dl">Name:</dt>
-          <dd className="card__dd">{props.data.name}</dd>
-        </div>
-        <div className="card__list">
-          <dt className="card__dl">Gender:</dt>
-          <dd className="card__dd">{props.data.gender}</dd>
-        </div>
+        <Description term="Name" definition={props.data.name} />
+        <Description term="Gender" definition={props.data.gender} />
       </dl>
     </div>
   );

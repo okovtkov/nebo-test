@@ -28,22 +28,3 @@
 .card:hover::after {
   color: var(--main);
 }
-
-.card dl {
-  margin: 0;
-}
-
-.card__list {
-  display: flex;
-  align-items: center;
-  height: 25px;
-}
-
-.card__dl {
-  display: inline-block;
-  font-weight: 700;
-}
-
-.card__dd {
-  margin-left: 10px;
-}
