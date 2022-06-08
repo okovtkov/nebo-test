@@ -9,10 +9,7 @@ function Character() {
   const params = useParams();
 
   useEffect(() => {
-    characters.getCharacterById(params.id).then((resp) => {
-      setData(resp);
-      console.log(resp)
-    });
+    characters.getCharacterById(params.id).then((resp) => setData(resp));
   }, [params.id]);
 
   if (data === null) return null;
