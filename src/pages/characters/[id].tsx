@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { characters } from '../../api/api';
+import { characters, films, vehicles, starships, planet } from '../../api/api';
 import Container from '../../components/container/container';
 import Description from '../../components/description/description';
 import HistoryContext from '../../context';
@@ -8,14 +8,15 @@ import { CharacterData, FilmData, PlanetData, StarshipData, VehicleData } from '
 
 function Character() {
   const [data, setData] = useState<CharacterData | null>(null);
-  const [planet, setPlanet] = useState<PlanetData | null>(null);
-  const [films, setFilms] = useState<FilmData[] | []>([]);
-  const [vehicles, setVehicles] = useState<VehicleData[] | []>([]);
-  const [starships, setStarships] = useState<StarshipData[] | []>([]);
+  const [planetData, setPlanetData] = useState<PlanetData | null>(null);
+  const [filmsData, setFilmsData] = useState<FilmData[] | []>([]);
+  const [vehiclesData, setVehiclesData] = useState<VehicleData[] | []>([]);
+  const [starshipsData, setStarshipsData] = useState<StarshipData[] | []>([]);
   const params = useParams();
   const {checkedCharacters, setCheckedCharacters} = useContext(HistoryContext);
 
   useEffect(() => {
+    if (!params.id) throw new Error('Stranger things..');
     characters.getCharacterById(params.id).then((resp) => {
       setData(resp);
       const characters = [...checkedCharacters];
@@ -33,16 +34,10 @@ function Character() {
 
   useEffect(() => {
     if (data) {
-      characters.getPlanet(data.homeworld).then((resp) => setPlanet(resp));
-      Promise.all(data.films.map((url) => {
-        return characters.getFilm(url).then((resp) => resp);
-      })).then((films) => setFilms(films));
-      Promise.all(data.vehicles.map((url) => {
-        return characters.getFilm(url).then((resp) => resp);
-      })).then((films) => setVehicles(films));
-      Promise.all(data.starships.map((url) => {
-        return characters.getStarship(url).then((resp) => resp);
-      })).then((starships) => setStarships(starships));
+      planet.getByCharacter(data).then((resp) => setPlanetData(resp));
+      films.getByCharacter(data).then((films) => setFilmsData(films));
+      vehicles.getByCharacter(data).then((vehicles) => setVehiclesData(vehicles));
+      starships.getByCharacter(data).then((starships) => setStarshipsData(starships));
     };
   }, [data]);
 
@@ -66,57 +61,57 @@ function Character() {
         <Description term="Skin color" definition={data.skin_color} />
         <Description term="Gender" definition={data.gender} />
       </Container>
-      {planet && (
+      {planetData && (
         <Container tag="dl" className="character__container" label="Homeworld">
-          <Description term="Name" definition={planet.name} />
-          <Description term="Climate" definition={planet.climate} />
-          <Description term="Rotation period" definition={planet.rotation_period} />
-          <Description term="Diameter" definition={planet.diameter} />
-          <Description term="Orbital Period" definition={planet.orbital_period} />
-          <Description term="Gravity" definition={planet.gravity} />
-          <Description term="Terrain" definition={planet.terrain} />
-          <Description term="Population" definition={planet.population} />
+          <Description term="Name" definition={planetData.name} />
+          <Description term="Climate" definition={planetData.climate} />
+          <Description term="Rotation period" definition={planetData.rotation_period} />
+          <Description term="Diameter" definition={planetData.diameter} />
+          <Description term="Orbital Period" definition={planetData.orbital_period} />
+          <Description term="Gravity" definition={planetData.gravity} />
+          <Description term="Terrain" definition={planetData.terrain} />
+          <Description term="Population" definition={planetData.population} />
         </Container>
       )}
-      {films.length > 0 && (
+      {filmsData.length > 0 && (
         <Container tag="dl" className="character__container" label="Films">
-          {films.map((film, i) => (
-            <>
+          {filmsData.map((film, i) => (
+            <div key={film.title}>
               <Description term="Title" definition={film.title} />
-              <Description term="Episode" definition={film.episode_id.toString()} />
+              <Description term="Episode" definition={film.episode_id?.toString()} />
               <Description term="Director" definition={film.director} />
-              {films.length - 1 !== i && (
+              {filmsData.length - 1 !== i && (
                 <hr />
               )}
-            </>
+            </div>
           ))}
         </Container>
       )}
-      {vehicles.length > 0 && (
+      {vehiclesData.length > 0 && (
         <Container tag="dl" className="character__container" label="Vehicles">
-          {vehicles.map((vehicle, i) => (
-            <>
+          {vehiclesData.map((vehicle, i) => (
+            <div key={vehicle.name}>
               <Description term="Name" definition={vehicle.name} />
               <Description term="Model" definition={vehicle.model} />
               <Description term="Passengers" definition={vehicle.passengers} />
-              {vehicles.length - 1 !== i && (
+              {vehiclesData.length - 1 !== i && (
                 <hr />
               )}
-            </>
+            </div>
           ))}
         </Container>
       )}
-      {starships.length > 0 && (
+      {starshipsData.length > 0 && (
         <Container tag="dl" className="character__container" label="Starships">
-          {starships.map((starship, i) => (
-            <>
+          {starshipsData.map((starship, i) => (
+            <div key={starship.name}>
               <Description term="Name" definition={starship.name} />
               <Description term="Model" definition={starship.model} />
               <Description term="Passengers" definition={starship.passengers} />
-              {starships.length - 1 !== i && (
+              {starshipsData.length - 1 !== i && (
                 <hr />
               )}
-            </>
+            </div>
           ))}
         </Container>
       )}

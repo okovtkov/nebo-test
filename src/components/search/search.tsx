@@ -19,7 +19,7 @@ function Search() {
       setData([]);
       return;
     }
-    characters.searchCharacterByName(value).then((resp) => setData(resp.results));
+    characters.searchCharacterByName(value).then((resp) => setData(resp));
   }, [value]);
 
   useEffect(() => {

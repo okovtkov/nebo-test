@@ -7,9 +7,10 @@ import Character from './pages/characters/[id]';
 import Search from './components/search/search';
 import { CharacterData } from './types';
 import { Link } from 'react-router-dom';
+import Slider from './components/slider/slider';
 
 function App() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<CharacterData[] | []>([]);
 
   const getId = useCallback((url: string) => {
     const arr = url.split('/');
@@ -17,9 +18,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    characters.get().then((resp) => {
-      setData(resp.results);
-    })
+    characters.get().then((resp) => setData(resp))
   }, []);
 
   return (
@@ -37,6 +36,7 @@ function App() {
                 </Link>
               ))}
             </div>
+            <Slider />
           </div>
         } />
         <Route path='/characters/:id' element={<Character />} />
