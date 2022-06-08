@@ -1,9 +1,9 @@
-import { Data } from '../../types';
+import { CharacterData } from '../../types';
 import Description from '../description/description';
 import './card.css';
 
 interface Props {
-  data: Data;
+  data: CharacterData;
 }
 
 function Card(props: Props) {

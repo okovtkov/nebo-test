@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
+import HistoryContext from './context';
+import { CharacterData } from './types';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+function Main() {
+  const [checkedCharacters, setCheckedCharacters] = useState<CharacterData[]>([]);
+
+  return (
+    <React.StrictMode>
+      <HashRouter>
+        <HistoryContext.Provider value={{checkedCharacters, setCheckedCharacters}}>
+          <App />
+        </HistoryContext.Provider>
+      </HashRouter>
+    </React.StrictMode>
+  )
+}
+
 root.render(
-  <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </React.StrictMode>
+  <Main />
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -5,7 +5,7 @@ import Card from './components/card/card';
 import './App.css';
 import Character from './pages/characters/[id]';
 import Search from './components/search/search';
-import { Data } from './types';
+import { CharacterData } from './types';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
         <Route path='/' element={
           <div className="app__container">
             <div className="app__cards">
-              {data.length !== 0 && data.map((item: Data) => (
+              {data.length !== 0 && data.map((item: CharacterData) => (
                 <Link key={item.name} to={`/characters/${getId(item.url)}`}>
                   <Card data={item} />
                 </Link>

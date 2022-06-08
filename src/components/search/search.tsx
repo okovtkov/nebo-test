@@ -2,13 +2,13 @@ import classNames from 'classnames';
 import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { characters } from '../../api/api';
-import { Data } from '../../types';
+import { CharacterData } from '../../types';
 import './search.css';
 
 function Search() {
   const [value, setValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState<Data[]>([]);
+  const [data, setData] = useState<CharacterData[]>([]);
   const getId = useCallback((url: string) => {
     const arr = url.split('/');
     return arr[arr.length - 2];
