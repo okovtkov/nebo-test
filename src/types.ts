@@ -52,7 +52,7 @@ export interface SpeciesData {
   url: string;
 }
 
-export interface StarshipsData {
+export interface StarshipData {
   name: string;
   model: string;
   manufacturer: string;
@@ -73,7 +73,7 @@ export interface StarshipsData {
   url: string;
 }
 
-export interface VehiclesData {
+export interface VehicleData {
   name: string;
   model: string;
   manufacturer: string;
@@ -86,6 +86,23 @@ export interface VehiclesData {
   consumables: string;
   vehicle_class: string;
   pilots: string[] | [];
+  films: string[] | [];
+  created: string;
+  edited: string;
+  url: string;
+}
+
+export interface PlanetData {
+  name: string;
+  rotation_period: string;
+  orbital_period: string;
+  diameter: string;
+  climate: string;
+  gravity: string;
+  terrain: string;
+  surface_water: string;
+  population: string;
+  residents: string[] | [];
   films: string[] | [];
   created: string;
   edited: string;

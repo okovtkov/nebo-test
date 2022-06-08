@@ -6,14 +6,17 @@ interface Props {
   children: React.ReactNode;
   className?: string;
   label: string;
+  tag: 'div' | 'article' | 'section' | 'dl';
 }
 
 function Container(props: Props) {
+  const Element = props.tag;
+
   return (
-    <section className={classNames("container", props.className)}>
+    <Element className={classNames("container", props.className)}>
       <label className="container__label">{props.label}</label>
       {props.children}
-    </section>
+    </Element>
   );
 }
 
