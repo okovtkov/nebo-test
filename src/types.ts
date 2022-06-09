@@ -9,9 +9,9 @@ export interface CharacterData {
   gender: 'male' | 'female' | 'n/a';
   homeworld: string;
   films: string[];
-  species: string[] | [];
-  vehicles: string[] | [];
-  starships: string[] | [];
+  species: string[];
+  vehicles: string[];
+  starships: string[];
   created: string;
   edited: string;
   url: string;
@@ -24,11 +24,11 @@ export interface FilmData {
   director: string,
   producer: string,
   release_date: string,
-  characters: string[] | [],
-  planets: string[] | [],
-  starships: string[] | [],
-  vehicles: string[] | [],
-  species: string[] | [],
+  characters: string[],
+  planets: string[],
+  starships: string[],
+  vehicles: string[],
+  species: string[],
   created: string;
   edited: string;
   url: string;
@@ -45,8 +45,8 @@ export interface SpeciesData {
   average_lifespan: string;
   homeworld: string;
   language: string;
-  people: string[] | [],
-  films: string[] | [],
+  people: string[],
+  films: string[],
   created: string;
   edited: string;
   url: string;
@@ -66,8 +66,8 @@ export interface StarshipData {
   hyperdrive_rating: string;
   MGLT: string;
   starship_class: string;
-  pilots: string[] | [];
-  films: string[] | [];
+  pilots: string[];
+  films: string[];
   created: string;
   edited: string;
   url: string;
@@ -85,8 +85,8 @@ export interface VehicleData {
   cargo_capacity: string;
   consumables: string;
   vehicle_class: string;
-  pilots: string[] | [];
-  films: string[] | [];
+  pilots: string[];
+  films: string[];
   created: string;
   edited: string;
   url: string;
@@ -102,8 +102,8 @@ export interface PlanetData {
   terrain: string;
   surface_water: string;
   population: string;
-  residents: string[] | [];
-  films: string[] | [];
+  residents: string[];
+  films: string[];
   created: string;
   edited: string;
   url: string;

@@ -1,49 +1,42 @@
 import Card from '../card/card';
-import { CharacterData } from '../../types';
 import './slider.css';
 import HistoryContext from '../../context';
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 
-interface Props {
-  data: CharacterData[] | [];
-}
-
-function Slider(props: Props) {
+function Slider() {
   const [counter, setCounter] = useState(0);
-  const container = useRef<HTMLDivElement>(null);
   const {checkedCharacters} = useContext(HistoryContext);
 
-  const onClick = useCallback((button: string) => {
-    if (!container.current) return;
-    const maxCounter = -checkedCharacters.length + 1;
-    if ((counter === 0 && button === 'prev') || (counter <= maxCounter && button === 'next')) return;
+  const onClickPrev = useCallback(() => {
+    if (counter === 0) return;
+    setCounter(counter + 1);
+  }, [counter]);
 
-    if (button === 'prev') {
-      container.current.style.left = 310 * (counter + 1) + 'px';
-      setCounter(counter + 1);
-    } else {
-      container.current.style.left = 310 * (counter - 1) + 'px';
-      setCounter(counter - 1);
-    }
+  const onClickNext = useCallback(() => {
+    const maxCounter = -checkedCharacters.length + 1;
+    if (counter <= maxCounter) return;
+    setCounter(counter - 1);
   }, [checkedCharacters.length, counter]);
 
   return (
     <article className="slider">
       <h1 className="slider__title">Вы смотрели</h1>
       <div className="slider__container">
-        <button className="slider__button slider__button--prev" onClick={() => onClick('prev')}>
+        <button className="slider__button slider__button--prev" onClick={onClickPrev}>
           ◀
         </button>
         <ul className="slider__list">
-          <div className="slider__list-container" ref={container}>
-            {checkedCharacters.map((item) => (
-              <li key={item.name}>
-                <Card data={item} />
-              </li>
-            ))}
-          </div>
+          {checkedCharacters.map((item, i) => (
+            <li
+              style={i === 0 ? {'marginLeft': 310 * counter + 'px'} : {}}
+              key={item.name}
+              className="slider__item"
+            >
+              <Card data={item} />
+            </li>
+          ))}
         </ul>
-        <button className="slider__button slider__button--next" onClick={() => onClick('next')}>
+        <button className="slider__button slider__button--next" onClick={onClickNext}>
           ▶
         </button>
       </div>

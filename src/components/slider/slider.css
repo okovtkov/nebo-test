@@ -15,7 +15,6 @@
   align-items: center;
   align-content: center;
   justify-content: center;
-  width: 78.4%;
 }
 
 .slider__button {
@@ -27,6 +26,8 @@
 }
 
 .slider__list {
+  display: flex;
+  width: 930px;
   margin-left: 10px;
   padding: 0;
   list-style-type: none;
@@ -38,4 +39,9 @@
   left: 0;
   display: flex;
   transition: left 0.2s ease;
+}
+
+.slider__item {
+  margin-left: 0;
+  transition: margin-left 0.2s linear;
 }

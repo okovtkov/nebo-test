@@ -1,12 +1,11 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { characters } from './api/api';
 import { Routes, Route } from 'react-router-dom';
 import Card from './components/card/card';
 import './App.css';
-import Character from './pages/characters/[id]';
+import CharacterPage from './pages/characters/[id]';
 import Search from './components/search/search';
 import { CharacterData } from './types';
-import { Link } from 'react-router-dom';
 import Slider from './components/slider/slider';
 import HistoryContext from './context';
 
@@ -32,11 +31,11 @@ function App() {
               ))}
             </div>
             {checkedCharacters.length !== 0 && (
-              <Slider data={data} />
+              <Slider />
             )}
           </div>
         } />
-        <Route path='/characters/:id' element={<Character />} />
+        <Route path='/characters/:id' element={<CharacterPage />} />
       </Routes>
     </div>
   );

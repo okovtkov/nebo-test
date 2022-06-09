@@ -1,18 +1,15 @@
 import classNames from 'classnames';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { characters } from '../../api/api';
 import { CharacterData } from '../../types';
+import { getId } from '../../utils/get-id';
 import './search.css';
 
 function Search() {
   const [value, setValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState<CharacterData[]>([]);
-  const getId = useCallback((url: string) => {
-    const arr = url.split('/');
-    return arr[arr.length - 2];
-  }, []);
 
   useEffect(() => {
     if (value === '') {
@@ -22,21 +19,20 @@ function Search() {
     characters.searchCharacterByName(value).then((resp) => setData(resp));
   }, [value]);
 
-  useEffect(() => {
-    document.addEventListener('click', (e: MouseEvent) => {
-      if (
-        (e.target as HTMLElement).closest('.search__list') ||
-        (e.target as HTMLElement).closest('.search__hint') ||
-        (e.target as HTMLElement).closest('.search__input')
-      ) setIsOpen(true);
-      else setIsOpen(false);
-      if ((e.target as HTMLElement).closest('a')) setIsOpen(false);
-    })
-  }, []);
+  const onClick = (e: MouseEvent) => {
+    if (
+      (e.target as HTMLElement).closest('.search__list') ||
+      (e.target as HTMLElement).closest('.search__hint') ||
+      (e.target as HTMLElement).closest('.search__input')
+    ) setIsOpen(true);
+    else setIsOpen(false);
+    if ((e.target as HTMLElement).closest('a')) setIsOpen(false);
+  };
 
   useEffect(() => {
-    console.log(data.length, value)
-  }, [data.length, value])
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
 
   return (
     <div className="search">
