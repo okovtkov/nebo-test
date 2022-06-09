@@ -40,7 +40,7 @@ function Character() {
       vehicles.getByCharacter(data).then((vehicles) => setVehiclesData(vehicles));
       starships.getByCharacter(data).then((starships) => setStarshipsData(starships));
     };
-  }, [data]);
+  }, [checkedCharacters, data]);
 
   if (data === null) return null;
 

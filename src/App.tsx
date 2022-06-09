@@ -14,7 +14,7 @@ function App() {
   const {checkedCharacters} = useContext(HistoryContext);
 
   useEffect(() => {
-    characters.get().then((resp) => setData(resp))
+    characters.get().then((resp) => setData(resp));
   }, []);
 
   return (

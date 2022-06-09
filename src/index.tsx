@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -12,12 +12,20 @@ const root = ReactDOM.createRoot(
 );
 
 function Main() {
-  const [checkedCharacters, setCheckedCharacters] = useState<CharacterData[]>([]);
+  const [checkedCharacters, setCheckedCharacters] = useState<CharacterData[]>(() => {
+    const json = sessionStorage.getItem('characters') || '[]';
+    return JSON.parse(json);
+  });
+
+  const setCharactersAndSave = useCallback((characters: CharacterData[]) => {
+    setCheckedCharacters(characters);
+    sessionStorage.setItem('characters', JSON.stringify(characters));
+  }, []);
 
   return (
     <React.StrictMode>
       <HashRouter>
-        <HistoryContext.Provider value={{checkedCharacters, setCheckedCharacters}}>
+        <HistoryContext.Provider value={{checkedCharacters, setCheckedCharacters: setCharactersAndSave}}>
           <App />
         </HistoryContext.Provider>
       </HashRouter>

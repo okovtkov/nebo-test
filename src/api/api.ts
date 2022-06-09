@@ -3,18 +3,15 @@ import { CharacterData, FilmData, PlanetData, VehicleData, StarshipData } from "
 export const characters = {
   get(): Promise<CharacterData[]> {
     return fetch('https://swapi.dev/api/people/').then((resp) => resp.json()).then((resp) => resp.results)
-      .catch(alert);
   },
 
   getCharacterById(id: string): Promise<CharacterData> {
     return fetch(`https://swapi.dev/api/people/${id}`).then((resp) => resp.json())
-      .catch(alert);
   },
 
   searchCharacterByName(name: string): Promise<CharacterData[]> {
     return fetch(`https://swapi.dev/api/people/?search=${name}`).then((resp) => resp.json())
       .then((resp) => resp.results)
-      .catch(alert);
   },
 };
 
