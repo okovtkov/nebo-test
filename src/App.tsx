@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { characters } from './api/api';
 import { Routes, Route } from 'react-router-dom';
 import Card from './components/card/card';
@@ -8,9 +8,11 @@ import Search from './components/search/search';
 import { CharacterData } from './types';
 import { Link } from 'react-router-dom';
 import Slider from './components/slider/slider';
+import HistoryContext from './context';
 
 function App() {
   const [data, setData] = useState<CharacterData[] | []>([]);
+  const {checkedCharacters} = useContext(HistoryContext);
 
   const getId = useCallback((url: string) => {
     const arr = url.split('/');
@@ -36,7 +38,9 @@ function App() {
                 </Link>
               ))}
             </div>
-            <Slider />
+            {checkedCharacters.length !== 0 && (
+              <Slider data={data} />
+            )}
           </div>
         } />
         <Route path='/characters/:id' element={<Character />} />
