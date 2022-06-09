@@ -20,12 +20,11 @@ function Character() {
     if (!params.id) throw new Error('Stranger things..');
     characters.getCharacterById(params.id).then((resp) => {
       setData(resp);
-      const characters = [...checkedCharacters];
-      const founded = characters.find((item) => item.name === resp.name);
-      if (!founded) {
+      const characters = [...checkedCharacters];        
+      const index = characters.findIndex((item) => item.name === resp.name);
+      if (index === -1) {
         setCheckedCharacters([resp, ...characters]);
       } else {
-        const index = characters.findIndex((item) => item.name === resp.name);
         characters.splice(index, 1);
         setCheckedCharacters([resp, ...characters]);
       }
