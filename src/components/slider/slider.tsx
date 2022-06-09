@@ -31,7 +31,9 @@ function Slider(props: Props) {
     <article className="slider">
       <h1 className="slider__title">Вы смотрели</h1>
       <div className="slider__container">
-        <button className="slider__button slider__button--prev" onClick={() => onClick('prev')} />
+        <button className="slider__button slider__button--prev" onClick={() => onClick('prev')}>
+          ◀
+        </button>
         <ul className="slider__list">
           <div className="slider__list-container" ref={container}>
             {checkedCharacters.map((item) => (
@@ -41,7 +43,9 @@ function Slider(props: Props) {
             ))}
           </div>
         </ul>
-        <button className="slider__button slider__button--next" onClick={() => onClick('next')} />
+        <button className="slider__button slider__button--next" onClick={() => onClick('next')}>
+          ▶
+        </button>
       </div>
     </article>
   );

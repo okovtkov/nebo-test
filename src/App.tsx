@@ -14,11 +14,6 @@ function App() {
   const [data, setData] = useState<CharacterData[] | []>([]);
   const {checkedCharacters} = useContext(HistoryContext);
 
-  const getId = useCallback((url: string) => {
-    const arr = url.split('/');
-    return arr[arr.length - 2];
-  }, []);
-
   useEffect(() => {
     characters.get().then((resp) => setData(resp))
   }, []);
@@ -33,9 +28,7 @@ function App() {
           <div className="app__container">
             <div className="app__cards">
               {data.length !== 0 && data.map((item: CharacterData) => (
-                <Link key={item.name} to={`/characters/${getId(item.url)}`}>
-                  <Card data={item} />
-                </Link>
+                <Card key={item.name} data={item} className="app__card" />
               ))}
             </div>
             {checkedCharacters.length !== 0 && (

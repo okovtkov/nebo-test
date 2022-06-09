@@ -34,6 +34,10 @@ function Search() {
     })
   }, []);
 
+  useEffect(() => {
+    console.log(data.length, value)
+  }, [data.length, value])
+
   return (
     <div className="search">
       <input
@@ -56,7 +60,7 @@ function Search() {
       ) : (
         <div className={classNames("search__hint", {
           "search__hint--opened": isOpen,
-        })}>{!data.length && !value ? 'Введите имя' : 'Ничего не найдено'}</div>
+        })}>{!value ? 'Введите имя' : 'Ничего не найдено'}</div>
       )}
     </div>
   );

@@ -13,40 +13,21 @@
 .slider__container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 78.5%;
+  align-content: center;
+  justify-content: center;
+  width: 78.4%;
 }
 
 .slider__button {
   position: relative;
-  width: 30px;
-  height: 30px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-}
-
-.slider__button::after {
-  position: absolute;
-  top: -7px;
-  left: -2px;
-  border: 15px solid transparent;
-  border-bottom: 20px solid black;
-  content: '';
-}
-
-.slider__button--prev {
-  margin-right: 20px;
-  transform: rotate(-90deg);
-}
-
-.slider__button--next {
-  margin-left: 20px;
-  margin-bottom: 18px;
-  transform: rotate(90deg);
+  font-size: 36px;
 }
 
 .slider__list {
+  margin-left: 10px;
   padding: 0;
   list-style-type: none;
   overflow: hidden;

@@ -27,8 +27,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 78%;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.app__card {
+  margin-bottom: 10px;
 }
